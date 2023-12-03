@@ -10,7 +10,7 @@ const getTP = async(req, res) => {
 }
 
 const postTP = async(req, res) => {
-    const datos = req.query //Capturar datos de la URL-postman
+    const datos = req.body //Capturar datos de la URL-postman
     let mensaje = 'Insercion exitosa'
     try {
         const tipo_participante = new TP(datos) //Instanciar el objeto
@@ -28,7 +28,7 @@ const postTP = async(req, res) => {
 
 
 const putTP = async(req, res) =>{
-    const {tipo_ps, genero_biologico, edad_minima, edad_maxima, nro_tp} = req.query
+    const {tipo_ps, genero_biologico, edad_minima, edad_maxima, nro_tp} = req.body
     try {
         const tipo_participante = await TP.findOneAndUpdate({tipo_ps: tipo_ps},
             {genero_biologico:genero_biologico, edad_minima:edad_minima, edad_maxima:edad_maxima, nro_tp:nro_tp

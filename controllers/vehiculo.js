@@ -10,7 +10,7 @@ const getVehiculo = async(req, res) => {
 }
 
 const postVehiculo = async(req, res) => {
-    const datos = req.query //Capturar datos de la URL-postman
+    const datos = req.body //Capturar datos de la URL-postman
     let mensaje = 'Insercion exitosa'
     try {
         const vehiculo = new Vehiculo(datos) //Instanciar el objeto
@@ -28,15 +28,15 @@ const postVehiculo = async(req, res) => {
 
 
 const putVehiculo = async(req, res) =>{
-    const {tipo_vehiculo, puestos_vehiculo, placa_vehiculo} = req.query
+    const {tipo_vehiculo, puestos_vehiculo, placa_vehiculo} = req.body
     try {
-        const vehiculo = await Vehiculo.findOneAndUpdate({tipo_vehiculo: tipo_vehiculo},
-            {puestos_vehiculo:puestos_vehiculo, placa_vehiculo:placa_vehiculo
+        const vehiculo = await Vehiculo.findOneAndUpdate({placa_vehiculo: placa_vehiculo},
+            {puestos_vehiculo:puestos_vehiculo, tipo_vehiculo:tipo_vehiculo
             })
             mensaje = 'Actualizacion exitosa'
     } catch(error) {
         mensaje = error
-    }
+    } 
     res.json({
         msg:mensaje
     })
@@ -44,9 +44,10 @@ const putVehiculo = async(req, res) =>{
 }
 
 const deleteVehiculo = async(req, res) =>{
-    const {tipo_vehiculo} = req.query //Desestructurar
+    const {placa_vehiculo} = req.query //Desestructurar
+    let mensaje = ''
     try {
-        const vehiculo = await Vehiculo.findOneAndDelete({tipo_vehiculo: tipo_vehiculo})
+        const vehiculo = await Vehiculo.findOneAndDelete({placa_vehiculo: placa_vehiculo})
             mensaje = 'Eliminacion exitosa'
     } catch(error) {
         mensaje = error

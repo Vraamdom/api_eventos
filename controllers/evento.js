@@ -10,7 +10,7 @@ const getEvento = async(req, res) => {
 }
 
 const postEvento = async(req, res) => {
-    const datos = req.query //Capturar datos de la URL-postman
+    const datos = req.body //Capturar datos de la URL-postman
     let mensaje = 'Insercion exitosa'
     try {
         const evento = new Evento(datos) //Instanciar el objeto
@@ -28,7 +28,7 @@ const postEvento = async(req, res) => {
 
 
 const putEvento = async(req, res) =>{
-    const {nombre_evento, hora_i, hora_f, encargado_f, encargado_e,encargado_e_t,nro_participantes,estado} = req.query
+    const {nombre_evento, hora_i, hora_f, encargado_f, encargado_e,encargado_e_t,nro_participantes,estado} = req.body
     try {
         const evento = await Evento.findOneAndUpdate({nombre_evento: nombre_evento},
             {hora_i:hora_i, hora_f:hora_f, encargado_f:encargado_f, encargado_e:encargado_e,

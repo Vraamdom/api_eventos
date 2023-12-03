@@ -10,7 +10,7 @@ const getParticipante = async(req, res) => {
 }
 
 const postParticipante = async(req, res) => {
-    const datos = req.query //Capturar datos de la URL-postman
+    const datos = req.body //Capturar datos de la URL-postman
     let mensaje = 'Insercion exitosa'
     try {
         const participante = new Participante(datos) //Instanciar el objeto
@@ -28,7 +28,7 @@ const postParticipante = async(req, res) => {
 
 
 const putParticipante = async(req, res) =>{
-    const {nombre_completo, edad, genero_biologico, tipo_documento, asistencia,Placa_vehiculo_personal,nro_documento,estado} = req.query
+    const {nombre_completo, edad, genero_biologico, tipo_documento, asistencia,Placa_vehiculo_personal,nro_documento} = req.body
     try {
         const participante = await Participante.findOneAndUpdate({nombre_completo: nombre_completo},
             {edad:edad, genero_biologico:genero_biologico, tipo_documento:tipo_documento, asistencia:asistencia,

@@ -1,4 +1,6 @@
 const express = require('express')
+const cors  = require('cors')
+const bodyParser = require('body-parser')
 const { dbConection } = require('../database/config')
 
 class Server{
@@ -9,6 +11,7 @@ class Server{
         this.participantePath = '/participantes'
         this.tpPath = '/tipo_participantes'
         this.vehiculoPath = '/vehiculos_contratados'
+        this.middlewares()
         this.routes()
         this.conectarDB()
     }
@@ -25,6 +28,11 @@ class Server{
         this.app.use(this.participantePath, require('../routes/participante'))
         this.app.use(this.tpPath, require('../routes/tipo_participante'))
         this.app.use(this.vehiculoPath, require('../routes/vehiculo'))
+    }
+
+    middlewares(){//
+        this.app.use( cors() ); //Indicar el uso de cors
+        this.app.use( bodyParser.json()) //Parsear objetos a insertar en la db
     }
 
     async conectarDB(){

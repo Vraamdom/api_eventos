@@ -18,6 +18,11 @@ const VehiculoSchema = ({
         unique: true,
         required:[true, 'La placa del vehículo es requerida'],
     },
+    precio_dolar: {
+        type: Number,
+        unique: false,
+        required:[true, 'El predio dolar es requerido']
+    }
 
 })
 
